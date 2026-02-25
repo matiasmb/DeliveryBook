@@ -1,0 +1,48 @@
+# Built application files
+*.apk
+*.aar
+*.ap_
+*.aab
+
+# Files for the ART/Dalvik VM
+*.dex
+
+# Java class files
+*.class
+
+# Generated files
+bin/
+gen/
+out/
+release/
+
+# Gradle
+.gradle/
+build/
+
+# Local configuration
+local.properties
+
+# Android Studio
+.idea/
+*.iml
+*.ipr
+*.iws
+.DS_Store
+
+# Keystore (no subir claves)
+*.jks
+*.keystore
+
+# Kotlin
+*.kotlin_module
+
+# External native build
+.externalNativeBuild/
+.cxx/
+
+# Android Profiling
+*.hprof
+
+# KSP
+app/build/generated/ksp/

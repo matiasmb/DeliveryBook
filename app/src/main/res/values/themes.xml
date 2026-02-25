@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <style name="Theme.DeliveryBook" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <!-- Splash del sistema invisible (transparente) para que solo se vea nuestra Composable. -->
+        <item name="android:windowSplashScreenBackground">@android:color/transparent</item>
+        <item name="android:windowSplashScreenAnimatedIcon">@drawable/ic_splash_transparent</item>
+    </style>
+
+</resources>
+

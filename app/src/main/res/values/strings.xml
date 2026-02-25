@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Delivery Book</string>
+
+    <!-- Contacts list -->
+    <string name="contacts_list_greeting">Buen día</string>
+    <string name="contacts_list_user_name">Jorgito</string>
+    <string name="contacts_search_label">Buscar por DNI, dirección o nombre</string>
+    <string name="contacts_results_title">Resultados</string>
+    <string name="contacts_recent_title">Últimos buscados</string>
+    <string name="contacts_recent_empty">Todavía no buscaste ningún contacto.</string>
+    <string name="contacts_new_contact">Nuevo contacto</string>
+
+    <!-- Contact detail -->
+    <string name="contact_detail_new_title">Nuevo contacto</string>
+    <string name="contact_detail_edit_title">Editar contacto</string>
+    <string name="contact_field_dni">DNI</string>
+    <string name="contact_dni_format">DNI: %1$s</string>
+    <string name="contact_field_name">Nombre</string>
+    <string name="contact_field_address">Dirección</string>
+    <string name="neighbors_title">Vecinos a los que entregaste algo</string>
+    <string name="neighbors_add_label">Agregar vecino</string>
+    <string name="action_add">Agregar</string>
+    <string name="action_save">Guardar</string>
+    <string name="action_delete">Eliminar</string>
+    <string name="action_back">Volver</string>
+    <string name="action_save_change">Guardar cambio</string>
+    <string name="action_delete_neighbor">Borrar vecino</string>
+</resources>
+
