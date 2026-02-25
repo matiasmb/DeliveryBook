@@ -46,3 +46,4 @@ local.properties
 
 # KSP
 app/build/generated/ksp/
+GITHUB_SSH_KEY.txt
