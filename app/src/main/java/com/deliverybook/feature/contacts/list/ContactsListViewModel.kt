@@ -6,8 +6,11 @@ import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import com.deliverybook.core.AppConstants
 import com.deliverybook.domain.model.Contact
+import com.deliverybook.domain.usecase.ClearAllRecentsUseCase
 import com.deliverybook.domain.usecase.MarkContactAsSearchedUseCase
+import com.deliverybook.domain.usecase.ObserveContactsCountUseCase
 import com.deliverybook.domain.usecase.ObserveRecentContactsUseCase
+import com.deliverybook.domain.usecase.RemoveFromRecentUseCase
 import com.deliverybook.domain.usecase.SearchContactsPagedUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
@@ -24,11 +27,15 @@ import kotlinx.coroutines.launch
 @HiltViewModel
 class ContactsListViewModel @Inject constructor(
     observeRecentContacts: ObserveRecentContactsUseCase,
+    observeContactsCount: ObserveContactsCountUseCase,
     private val searchContactsPaged: SearchContactsPagedUseCase,
-    private val markContactAsSearched: MarkContactAsSearchedUseCase
+    private val markContactAsSearched: MarkContactAsSearchedUseCase,
+    private val removeFromRecent: RemoveFromRecentUseCase,
+    private val clearAllRecents: ClearAllRecentsUseCase
 ) : ViewModel() {
 
     private val searchQuery = MutableStateFlow("")
+    private val isRecentEditMode = MutableStateFlow(false)
 
     private val recentContacts: StateFlow<List<Contact>> =
         observeRecentContacts()
@@ -38,12 +45,22 @@ class ContactsListViewModel @Inject constructor(
                 initialValue = emptyList()
             )
 
+    private val contactsCount: StateFlow<Int> =
+        observeContactsCount()
+            .stateIn(
+                scope = viewModelScope,
+                started = SharingStarted.WhileSubscribed(5_000),
+                initialValue = 0
+            )
+
     val uiState: StateFlow<ContactsListUiState> =
-        combine(searchQuery, recentContacts) { query, recent ->
+        combine(searchQuery, recentContacts, isRecentEditMode, contactsCount) { query, recent, editMode, count ->
             ContactsListUiState(
                 query = query,
                 recentContacts = recent,
-                showSearchResults = query.length >= AppConstants.Search.MIN_LENGTH
+                showSearchResults = query.length >= AppConstants.Search.MIN_LENGTH,
+                isRecentEditMode = editMode,
+                contactsCount = count
             )
         }.stateIn(
             scope = viewModelScope,
@@ -51,7 +68,9 @@ class ContactsListViewModel @Inject constructor(
             initialValue = ContactsListUiState(
                 query = "",
                 recentContacts = emptyList(),
-                showSearchResults = false
+                showSearchResults = false,
+                isRecentEditMode = false,
+                contactsCount = 0
             )
         )
 
@@ -75,11 +94,34 @@ class ContactsListViewModel @Inject constructor(
             markContactAsSearched(dni)
         }
     }
+
+    fun onRecentLongPress() {
+        isRecentEditMode.value = true
+    }
+
+    fun onExitRecentEditMode() {
+        isRecentEditMode.value = false
+    }
+
+    fun onRemoveFromRecent(dni: String) {
+        viewModelScope.launch {
+            removeFromRecent(dni)
+        }
+    }
+
+    fun onClearAllRecents() {
+        viewModelScope.launch {
+            clearAllRecents()
+            isRecentEditMode.value = false
+        }
+    }
 }
 
 data class ContactsListUiState(
     val query: String,
     val recentContacts: List<Contact>,
-    val showSearchResults: Boolean
+    val showSearchResults: Boolean,
+    val isRecentEditMode: Boolean = false,
+    val contactsCount: Int = 0
 )
 

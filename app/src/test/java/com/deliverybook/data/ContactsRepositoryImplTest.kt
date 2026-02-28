@@ -7,7 +7,6 @@ import com.google.common.truth.Truth.assertThat
 import com.deliverybook.data.local.DeliveryBookDatabase
 import com.deliverybook.data.repository.ContactsRepositoryImpl
 import com.deliverybook.domain.model.Contact
-import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.runBlocking
 import org.junit.After
 import org.junit.Before
@@ -17,7 +16,6 @@ import org.robolectric.RobolectricTestRunner
 import org.robolectric.annotation.Config
 
 @RunWith(RobolectricTestRunner::class)
-@OptIn(ExperimentalCoroutinesApi::class)
 @Config(manifest = Config.NONE)
 class ContactsRepositoryImplTest {
 

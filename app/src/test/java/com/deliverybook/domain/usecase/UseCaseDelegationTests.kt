@@ -4,11 +4,9 @@ import com.deliverybook.domain.model.Contact
 import com.deliverybook.domain.repository.ContactsRepository
 import io.mockk.coVerify
 import io.mockk.mockk
-import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runTest
 import org.junit.Test
 
-@OptIn(ExperimentalCoroutinesApi::class)
 class UseCaseDelegationTests {
 
     private val repository: ContactsRepository = mockk(relaxed = true)

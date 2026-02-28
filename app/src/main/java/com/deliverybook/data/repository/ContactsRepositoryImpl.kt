@@ -24,6 +24,9 @@ class ContactsRepositoryImpl(
     override fun observeRecentContacts(limit: Int): Flow<List<Contact>> =
         contactsDao.getRecent(limit).map { list -> list.map { it.toDomain() } }
 
+    override fun observeContactsCount(): Flow<Int> =
+        contactsDao.observeContactsCount()
+
     override fun searchContactsPaged(query: String) =
         Pager(
             config = PagingConfig(
@@ -62,6 +65,18 @@ class ContactsRepositoryImpl(
                     lastSearchedAtMillis = timestampMillis
                 )
             )
+        }
+    }
+
+    override suspend fun removeFromRecent(dni: String) {
+        withContext(ioDispatcher) {
+            contactsDao.clearLastSearched(dni)
+        }
+    }
+
+    override suspend fun clearAllRecents() {
+        withContext(ioDispatcher) {
+            contactsDao.clearAllLastSearched()
         }
     }
 

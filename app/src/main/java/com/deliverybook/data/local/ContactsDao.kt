@@ -11,6 +11,9 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 interface ContactsDao {
 
+    @Query("SELECT COUNT(*) FROM contacts")
+    fun observeContactsCount(): Flow<Int>
+
     @Query("SELECT * FROM contacts WHERE dni = :dni LIMIT 1")
     suspend fun getByDni(dni: String): ContactEntity?
 
@@ -40,5 +43,11 @@ interface ContactsDao {
         """
     )
     fun getRecent(limit: Int): Flow<List<ContactEntity>>
+
+    @Query("UPDATE contacts SET lastSearchedAtMillis = NULL WHERE dni = :dni")
+    suspend fun clearLastSearched(dni: String)
+
+    @Query("UPDATE contacts SET lastSearchedAtMillis = NULL WHERE lastSearchedAtMillis IS NOT NULL")
+    suspend fun clearAllLastSearched()
 }
 

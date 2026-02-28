@@ -18,7 +18,7 @@ object AppConstants {
 
     object Search {
         const val MIN_LENGTH = 3
-        const val RECENT_LIMIT = 10
+        const val RECENT_LIMIT = 30
     }
 
     object Splash {

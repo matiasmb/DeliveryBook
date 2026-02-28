@@ -1,5 +1,6 @@
 package com.deliverybook.feature.contacts.detail
 
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -28,6 +29,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -78,7 +80,8 @@ fun ContactDetailScreen(
                 onValueChange = viewModel::onDniChange,
                 label = { Text(stringResource(R.string.contact_field_dni)) },
                 singleLine = true,
-                enabled = !uiState.isExistingContact
+                enabled = !uiState.isExistingContact,
+                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number)
             )
 
             OutlinedTextField(
@@ -200,7 +203,8 @@ private fun ContactDetailScreenNewPreview() {
                     value = "",
                     onValueChange = {},
                     label = { Text(stringResource(R.string.contact_field_dni)) },
-                    singleLine = true
+                    singleLine = true,
+                    keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number)
                 )
                 OutlinedTextField(
                     modifier = Modifier.fillMaxWidth(),

@@ -22,6 +22,7 @@ build/
 
 # Local configuration
 local.properties
+keystore.properties
 
 # Android Studio
 .idea/
@@ -46,4 +47,3 @@ local.properties
 
 # KSP
 app/build/generated/ksp/
-GITHUB_SSH_KEY.txt

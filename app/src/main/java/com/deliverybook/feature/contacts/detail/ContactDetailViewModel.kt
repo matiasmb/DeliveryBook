@@ -60,7 +60,8 @@ class ContactDetailViewModel @Inject constructor(
     }
 
     fun onDniChange(newDni: String) {
-        _uiState.update { it.copy(dni = newDni) }
+        val numericOnly = newDni.filter { it.isDigit() }
+        _uiState.update { it.copy(dni = numericOnly) }
     }
 
     fun onNameChange(newName: String) {
@@ -126,8 +127,8 @@ class ContactDetailViewModel @Inject constructor(
         viewModelScope.launch {
             val contact = Contact(
                 dni = current.dni,
-                name = current.name,
-                address = current.address,
+                name = current.name.toTitleCase(),
+                address = current.address.toTitleCase(),
                 neighbors = current.neighbors,
                 lastSearchedAtMillis = null
             )
@@ -135,6 +136,11 @@ class ContactDetailViewModel @Inject constructor(
             onFinished()
         }
     }
+
+    private fun String.toTitleCase(): String =
+        trim().split("\\s+".toRegex()).joinToString(" ") { word ->
+            word.replaceFirstChar { c -> c.uppercaseChar() }
+        }
 
     fun onDelete(onFinished: () -> Unit) {
         val current = _uiState.value

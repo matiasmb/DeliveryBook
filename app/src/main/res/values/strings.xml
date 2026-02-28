@@ -5,11 +5,16 @@
     <!-- Contacts list -->
     <string name="contacts_list_greeting">Buen día</string>
     <string name="contacts_list_user_name">Jorgito</string>
-    <string name="contacts_search_label">Buscar por DNI, dirección o nombre</string>
+    <string name="contacts_search_label">Ingrese DNI, dirección o nombre</string>
     <string name="contacts_results_title">Resultados</string>
     <string name="contacts_recent_title">Últimos buscados</string>
     <string name="contacts_recent_empty">Todavía no buscaste ningún contacto.</string>
     <string name="contacts_new_contact">Nuevo contacto</string>
+    <string name="contacts_count_format">%1$d contactos en la base de datos</string>
+    <string name="action_clear_search">Borrar búsqueda</string>
+    <string name="recent_clear_list">Limpiar lista</string>
+    <string name="recent_remove_item">Quitar de recientes</string>
+    <string name="recent_edit_done">Listo</string>
 
     <!-- Contact detail -->
     <string name="contact_detail_new_title">Nuevo contacto</string>
